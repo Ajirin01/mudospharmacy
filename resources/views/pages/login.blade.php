@@ -1,7 +1,6 @@
 
 @extends('auth_layout')
 @section('content')
-<section id="form">
     <div class="limiter">
 		<div class="container-login100" style="background-color:  rgba(6, 2, 14, 0)">
 			<div class="wrap-login100">
@@ -54,6 +53,5 @@
 </div>
 </div>
 </div>
-</section><!--/form-->
 
 @endsection

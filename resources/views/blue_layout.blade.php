@@ -241,7 +241,7 @@
                 $shipping_id=Session::get('shipping_id');
                 $customer_id = Session::get('customer_id');
             @endphp
-            <li class="header_cart"><a href="#">My Cart</a></li>
+            {{-- <li class="header_cart"><a href="{{URL::to('/show-cart')}}">My Cart</a></li> --}}
             @if ($customer_id  != NULL && $shipping_id == NULL)
               <li class="check"><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i>Checkout</a></li>
             @endif
@@ -251,7 +251,7 @@
             {{-- <li class="check"><a href="{{URL::to('/show-cart')}}">Checkout</a></li> --}}
             <li class="check"><a href="mailto:pharmacistobinna@mudospharmacy.com"><i class="fa text text-success fa-comment"></i> Consult A pharmacist</a></li>
             @if($customer_id  !=  null)
-            <li class="login"><a href="{{URL::to('/customer_logout')}}"><i class="fa fa-lock"></i> Logout</a></li>
+            <li class="login"><a href="{{URL::to('/customer_logout')}}"><i class="fa fa-unlock"></i> Logout</a></li>
 
             @else
             <li class="login"><a href="{{URL::to('/login-check')}}"><i class="fa fa-lock"></i> Login</a></li>

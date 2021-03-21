@@ -52,7 +52,7 @@
                   <div class="slider-header fadeInDown-1">ARE YOU IN MINNA?</div>
                   <div class="big-text fadeInDown-1"> ORDER DRUGS ONLINE </div>
                   <div class="excerpt fadeInDown-2 hidden-xs"> <span>PAY FOR THE DRUGS ONLINE</span> </div>
-                  <div class="excerpt fadeInDown-2 hidden-xs"> <span>GET YOUR DRUGS DELIVERED RIGHT AT YOUR DOOR STEP WITHIN 20 - 40 MINUTES AROUND THE MINNA METROPOLIS</span> </div>
+                  <div class="excerpt fadeInDown-2 hidden-xs"> <span>GET YOUR DRUGS DELIVERED RIGHT AT YOUR <br> DOOR STEP WITHIN 20 - 40 MINUTES AROUND <br> THE MINNA METROPOLIS</span> </div>
                   <div class="button-holder fadeInDown-3"> <a href="{{URL::to('/all_products')}}" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                 </div>
                 <!-- /.caption --> 

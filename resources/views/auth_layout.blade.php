@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="keywords" content="MediaCenter, Template, eCommerce">
+	<meta name="robots" content="all">
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{asset('fontend/css/bootstrap.min.css')}}">
     <link href="{{asset('fontend/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -164,7 +171,7 @@
 					$shipping_id=Session::get('shipping_id');
 					$customer_id = Session::get('customer_id');
 				@endphp
-				<li class="header_cart"><a href="#">My Cart</a></li>
+				{{-- <li class="header_cart"><a href="#">My Cart</a></li> --}}
 				@if ($customer_id  != NULL && $shipping_id == NULL)
 				  <li class="check"><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i>Checkout</a></li>
 				@endif
@@ -301,7 +308,7 @@
 	  <div class="container">
 		<div class="row"> 
 		  <!-- ============================================== CONTENT ============================================== -->
-		  <div class=""> 
+		  <div class="col-sm-12"> 
 			<!-- ========================================== SECTION – HERO ========================================= -->
 			@yield('content')
 			<!-- we put slider here -->

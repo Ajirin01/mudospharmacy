@@ -84,51 +84,96 @@ class CheckoutController extends Controller
           Session::put('total_price', $total_price);
           return Redirect::to('/show-cart');
         }
-        // $cart = Cart::getContent();
-        // $data = array();
-        // $data['cart'] = $cart;
-        // $data['customer_id'] = Session::get('customer_id');
-        // $subtotal_price = 0;
-        // foreach($cart as $cart){
-        //   $subtotal_price = $subtotal_price + $cart->price * $cart->quantity;
-        // }
+        $cart = Cart::getContent();
+        $data = array();
+        $data['cart'] = $cart;
+        $data['customer_id'] = Session::get('customer_id');
+        $subtotal_price = 0;
+        foreach($cart as $cart){
+          $subtotal_price = $subtotal_price + $cart->price * $cart->quantity;
+        }
         
-        // $data['sub_total'] = $subtotal_price;
-        // $data['total_price'] = $total_price;
+        $data['sub_total'] = $subtotal_price;
+        $data['total_price'] = $total_price;
         
 
-        // $temp_data = DB::table('tbl_temp_data')
-        //               ->where('customer_id',Session::get('customer_id'))
-        //               ->first();
+        $temp_data = DB::table('tbl_temp_data')
+                      ->where('customer_id',Session::get('customer_id'))
+                      ->first();
 
-        // if($temp_data){
-        //   $result = DB::table('tbl_temp_data')
-        //               ->where('customer_id',Session::get('customer_id'))
-        //               ->update($data);
-        //   return view('pages.checkout');
-        // }else{
-        //   $temp_data = DB::table('tbl_temp_data')
-        //              ->insertGetId($data);
-        //   return view('pages.checkout');
-        // }
+        if($temp_data){
+          $result = DB::table('tbl_temp_data')
+                      ->where('customer_id',Session::get('customer_id'))
+                      ->update($data);
+          return view('pages.checkout');
+        }else{
+          $temp_data = DB::table('tbl_temp_data')
+                     ->insertGetId($data);
+          return view('pages.checkout');
+        }
         
 
     }
 
     public function save_shipping_details(Request $request){
-        $data=array();
-        $data['shipping_email']=$request->shipping_email;
-        $data['shipping_first_name']=$request->shipping_first_name;
-        $data['shipping_last_name']=$request->shipping_last_name;
-        $data['shipping_address']=$request->shipping_address;
-        $data['shipping_mobile_number']=$request->shipping_mobile_number;
-        $data['shipping_city']=$request->shipping_city;
+        $shipping_details=array();
+        $shipping_details['shipping_email']=$request->shipping_email;
+        $shipping_details['shipping_first_name']=$request->shipping_first_name;
+        $shipping_details['shipping_last_name']=$request->shipping_last_name;
+        $shipping_details['shipping_address']=$request->shipping_address;
+        $shipping_details['shipping_mobile_number']=$request->shipping_mobile_number;
+        $shipping_details['shipping_city']=$request->shipping_city;
 
+        $customer_id = DB::table('tbl_customer')
+                 ->where('customer_email', $shipping_details['shipping_email'])
+                 ->first();
+
+        $temp_data= DB::table('tbl_temp_data')
+               ->where('customer_id', $customer_id->customer_id)
+               ->first();
 
         $shipping_id=DB::table('tbl_shipping')
-                 ->insertGetId($data);
+                 ->insertGetId($shipping_details);
         DB::update('update  tbl_temp_data set shipping_id ='.$shipping_id.' where customer_id  = ?', [Session::get('customer_id')]);
-        return Redirect::to('/payment');
+
+        $pay_one_delivery = $request->pay_on_delivery;
+
+        if($pay_one_delivery){
+          // return response()->json('pay on delivery was selected!');
+          $ship_data=array();
+          $ship_data['name'] = $shipping_details['shipping_first_name'].' '.$shipping_details['shipping_last_name'];
+          $ship_data['address'] = $shipping_details['shipping_address'];
+          $ship_data['phone'] = $shipping_details['shipping_mobile_number'];
+          $ship_data['email'] = $shipping_details['shipping_email'];
+          $ship_data['order_id'] = rand(1234,9999);
+          $ship_data['order_details'] = $temp_data->cart;
+          $ship_data['order_total'] = $temp_data->total_price;
+          $ship_data['status'] = 'pay on delivery';
+
+          $products= $temp_data->cart;
+
+          foreach (json_decode($products) as $product) {
+            $table_product = DB::table('tbl_products')
+                      ->where('product_id', $product->id)
+                      ->first();
+
+            $initial_sold = $table_product->sold;
+            $new_sold = $initial_sold + $product->quantity;
+
+            DB::update('update  tbl_products set sold ='.$new_sold.' where product_id  = ?', [$product->id]);
+            // exit;
+          }
+
+          DB::table('tbl_order_details')
+                  ->insert($ship_data);
+          return view('callback');
+            
+          
+        }else{
+          // return response()->json('customer did not select pay on delivery!');
+          return Redirect::to('/payment');
+        }
+        // return Redirect::to('/payment');
 
     }
 
