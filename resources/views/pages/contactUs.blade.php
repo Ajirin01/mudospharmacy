@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('blue_layout')
 
 @section('content')
 <section class="section gb nopadtop">
@@ -7,8 +7,8 @@
 
             {{-- <div id="map" class="wow slideInUp"></div> --}}
 
-            <div class="row contactv2 text-center">
-                <div class="col-md-3">
+            <div class="row text-center">
+                <div class="col-md-12">
                     <div class="small-box">
                         <i class="flaticon-email wow fadeIn"></i>
                         <h4>Contact us today</h4>
@@ -16,7 +16,7 @@
                     </div><!-- end small-box -->
                 </div><!-- end col -->
 
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <div class="small-box">
                         <i class="flaticon-map-with-position-marker wow fadeIn"></i>
                         <h4>Visit Our Office</h4>
@@ -29,7 +29,7 @@
                     </div><!-- end small-box -->
                 </div><!-- end col -->
 
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <div class="small-box">
                         <i class="flaticon-share wow fadeIn"></i>
                         <h4>Be Social</h4>
@@ -58,7 +58,7 @@
             
             <form action="{{url('/contactUs')}}" method="POST">
                 @csrf
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="form-group">
                         @if ($errors->has('email'))
                         <span class="text-danger" role="alert">
@@ -70,7 +70,7 @@
                         <input class="form-control" type="text" name="full_name" id="full-name">
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="form-group">
                         @if ($errors->has('email'))
                         <span class="text-danger" role="alert">
@@ -82,7 +82,7 @@
                         <input class="form-control" type="email" name="email" id="email">
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="form-group">
                         @if ($errors->has('email'))
                         <span class="text-danger" role="alert">
@@ -94,7 +94,7 @@
                         <textarea class="form-control" name="message" id="message" cols="30" rows="10"></textarea>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="form-group">
                         <input class="form-control btn btn-primary" type="submit" value="Submit" name="contact">
                     </div>
@@ -102,5 +102,9 @@
             </form>
         </div>
     </div>
+</div>
+</div>
+</div>
+        
 
 @endsection

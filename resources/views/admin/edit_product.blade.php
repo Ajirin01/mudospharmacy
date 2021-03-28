@@ -128,6 +128,20 @@
                     </div>
                   </div>
 
+                  <div class="control-group">
+                    <label class="control-label" for="date01">Manufacture Date</label>
+                    <div class="controls">
+                      <input type="calender" class="input-xlarge" name="manufacture_date" value="{{$product_info->manufacture_date}}" required>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="date01">Expiry Date</label>
+                    <div class="controls">
+                      <input type="calender" class="input-xlarge" name="expiry_date" value="{{$product_info->expiry_date}}" required>
+                    </div>
+                  </div>
+
 
                   <div class="control-group">
                       <label class="class-group bg-danger" style="color:red;">Please if there is any need to change the picture, Select the button below</label>

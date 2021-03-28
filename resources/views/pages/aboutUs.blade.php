@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('blue_layout')
 
 @section('content')
 
@@ -26,6 +26,8 @@
                 </div>
             </div>
         </div>
-    {{-- </div> --}}
+    </div>
+</div>
+</div>
 
 @endsection

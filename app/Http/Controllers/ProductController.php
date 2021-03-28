@@ -56,6 +56,8 @@ class ProductController extends Controller
         $data['product_shipping_price']=$request->product_shipping_price;
         $data['publication_status']=$request->publication_status;
         $data['prescription']=$request->prescription;
+        $data['manufacture_date']=$request->manufacture_date;
+        $data['expiry_date']=$request->expiry_date;
         $image=$request->file('product_image');
 
         if($image){
@@ -142,6 +144,8 @@ public function update_product(Request $request, $product_id){
         $data['product_shipping_price']=$request->product_shipping_price;
         $data['publication_status']=$request->publication_status;
         $data['prescription']=$request->prescription;
+        $data['manufacture_date']=$request->manufacture_date;
+        $data['expiry_date']=$request->expiry_date;
         $image=$request->file('product_image');
 
         $product_info= DB::table('tbl_products')

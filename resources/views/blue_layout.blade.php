@@ -348,7 +348,7 @@
               <ul class="nav navbar-nav">
                 <li class="active dropdown"> <a href="/">Home</a> </li>
                 <li class="dropdown mega-menu"> 
-                <a href="{{URL::to('/contactUs')}}"   class="dropdown-toggle" data-toggle="dropdown">Contact</a>
+                <a href="{{URL::to('/contactUs')}}"   class="dropdown-toggle">Contact</a>
                 </li>
                 <li class="hidden-sm"> <a href="{{URL::to('/aboutUs')}}">About Us</a> </li>
                 <li class="navbar-right special-menu"> <a href="#"></a> </li>

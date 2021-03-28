@@ -118,6 +118,20 @@
                     </div>
                   </div>
 
+                  <div class="control-group">
+                    <label class="control-label" for="date01">Manufacture Date</label>
+                    <div class="controls">
+                      <input type="calender" class="input-xlarge" name="manufacture_date" required>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="date01">Expiry Date</label>
+                    <div class="controls">
+                      <input type="calender" class="input-xlarge" name="expiry_date" required>
+                    </div>
+                  </div>
+
 
                   <div class="control-group">
                     <label class="control-label" for="fileInput">Image</label>
