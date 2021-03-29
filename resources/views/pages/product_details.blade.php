@@ -43,7 +43,7 @@
                         <div class="btn btn-default add-to-cart" id="add-to-cart">
                             <strong class="text text-success">
                                 <br>
-                                Upload prescription <br> <br>
+                                THIS IS A PRESCRIPTION DRUG, PLEASE UPLOAD YOUR <br> DOCTOR'S PRESCRIPTION IMAGE <br> <br>
                             </strong> 
                             
                             <form action="{{url('/send-pharm-notification')}}" method="post" id="send-pharm-notification" enctype="multipart/form-data">
