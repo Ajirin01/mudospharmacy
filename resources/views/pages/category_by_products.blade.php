@@ -20,7 +20,7 @@
 											<div class="overlay-content">
 												<h2> # {{$v_category_by_product->product_price}}</h2>
 												<p>{{$v_category_by_product->product_name}}</p>
-												<p>{{$v_category_by_product->product_short_description}}</p>
+												<p>{{substr($v_category_by_product->product_description,0,50)}}...</p>
 												<a href="{{URL::to('/view_product/'.$v_category_by_product->product_id)}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 											</div>
 										</div>

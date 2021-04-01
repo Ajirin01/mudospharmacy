@@ -106,16 +106,16 @@
                     </div>
                   </div>
 
-                <div class="control-group">
+                {{-- <div class="control-group">
                   <label class="control-label" for="textarea2">Product Short Description</label>
                   <div class="controls">
                     <textarea class="" name="product_short_description" rows="3" required>   {{$product_info->product_short_description}}</textarea>
                   </div>
-                </div>
+                </div> --}}
 
 
                 <div class="control-group">
-                    <label class="control-label" for="textarea2">Product Long Description</label>
+                    <label class="control-label" for="textarea2">Product Description</label>
                     <div class="controls">
                       <textarea class="" name="product_long_description" rows="3"  required> {{$product_info->product_long_description}}</textarea>
                     </div>
@@ -131,14 +131,14 @@
                   <div class="control-group">
                     <label class="control-label" for="date01">Manufacture Date</label>
                     <div class="controls">
-                      <input type="calender" class="input-xlarge" name="manufacture_date" value="{{$product_info->manufacture_date}}" required>
+                      <input type="date" class="input-xlarge" name="manufacture_date" value="{{$product_info->manufacture_date}}" required>
                     </div>
                   </div>
 
                   <div class="control-group">
                     <label class="control-label" for="date01">Expiry Date</label>
                     <div class="controls">
-                      <input type="calender" class="input-xlarge" name="expiry_date" value="{{$product_info->expiry_date}}" required>
+                      <input type="date" class="input-xlarge" name="expiry_date" value="{{$product_info->expiry_date}}" required>
                     </div>
                   </div>
 

@@ -14,8 +14,6 @@ Session_start();
 
 class ManufactureController extends Controller
 {
-    //
-
     public function index(){
         $this->AdminAuthCheck();
 
@@ -23,33 +21,69 @@ class ManufactureController extends Controller
 
          return view('admin.add_manufacture');
     }
+
     public function save_manufacture(Request $request){
-
-        $data=array();
-       $data['manufacture_id']=$request->manufacture_id;
-       $data['manufacture_name']=$request->manufacture_name;
-       $data['manufacture_description']=$request->manufacture_description;
-       $data['publication_status']=$request->publication_status;
-
-       DB::table('tbl_manufacture')->insert($data);
-       Session::put('message','Manufacture Added Successfully');
-       return Redirect::to('/add-manufacture');
+        $manufacturer = (['manufacture_name' => $request->manufacture_name, 'manufacture_description' => $request->manufacture_description, 'publication_status' => $request->publication_status]);
+        $size_manufacturer = count($manufacturer['manufacture_name']);
+        $loop_times = $size_manufacturer;
+        if($manufacturer['manufacture_name'] == [null] || $manufacturer['manufacture_description'] == [null]){
+            return redirect()->back()->with('errors','Error! Please fill up all fields');
+        }else{
+            $created = false;
+            for($i=0; $i < $loop_times; $i++){
+                $manufacture_name = $manufacturer['manufacture_name'][$i];
+                $manufacture_description = $manufacturer['manufacture_description'][$i];
+                $publication_status = $manufacturer['publication_status'][$i];
+                $data['manufacture_name'] = $manufacturer['manufacture_name'][$i];
+                $data['manufacture_description'] = $manufacturer['manufacture_description'][$i];
+                $data['publication_status'] = $manufacturer['publication_status'][$i];
+                
+                if($manufacture_name == null || $manufacture_description == null){
+                    if($i == 0){
+                        $error = "Manufacturer ".($i+1)." could not be successfully added to record because Manufacturer name or Manufacturer code can not be empty!";    
+                    }else{
+                        $error = "Manufacturer ".($i+1)." could not be successfully added to record because Manufacturer name or Manufacturer code can not be empty! NB: OTHERS MAY HAVE BEEN CREATED SUCCESSFULLY";                       
+                    }
+                    return redirect()->back()->with('errors',$error);
+                }else{
+                    $Manufacturer = DB::table('tbl_manufacture')->where('manufacture_name',$manufacture_name)->first();
+                    // return response()->json($Manufacturer== null);
+                    if($Manufacturer != null){
+                        $error = 'Manufacturer "'.$manufacture_name.'" could not be successfully added to record because Manufacturer name "'.$manufacture_name.'" already exists!';
+                        return redirect()->back()->with('errors',$error);
+                    }else{
+                        $create_manufacturer = DB::table('tbl_manufacture')->insert($data);
+                        if($create_manufacturer){
+                            $created = true;
+                        }else{
+                            $created = false;
+                        }
+                    }
+                }
+            }
+            if($created){
+                return redirect()->back()->with('msg','Manufacturer(s) was successfully created!');
+            }else{
+                return redirect()->back()->with('msg','Manufacturer(s) could not be successfully created!');
+            }
+        }
 
 
    }
-          public function all_manufacture(){
-            $this->AdminAuthCheck();
-            $all_manufacture_info=DB::table('tbl_manufacture')->get();
 
-            $manage_manufacture=view('admin.all_manufacture')
-            ->with('all_manufacture_info',$all_manufacture_info);
+    public function all_manufacture(){
+        $this->AdminAuthCheck();
+        $all_manufacture_info=DB::table('tbl_manufacture')->get();
 
-            return view('admin_layout')
-                 ->with('admin_all_manufacture', $manage_manufacture);
+        $manage_manufacture=view('admin.all_manufacture')
+        ->with('all_manufacture_info',$all_manufacture_info);
+
+        return view('admin_layout')
+                ->with('admin_all_manufacture', $manage_manufacture);
 
 
 
-          }
+    }
 
 
 

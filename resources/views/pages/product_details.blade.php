@@ -88,6 +88,8 @@
                 <p><b>Brand:</b>{{$product_by_details->manufacture_name}}</p>
                 <p><b>Category:</b>{{$product_by_details->category_name}}</p>
                 <p><b>Size:</b>{{$product_by_details->product_size}}</p>
+                <p><b>Manufacture Date:</b>{{$product_by_details->manufacture_date}}</p>
+                <p><b>Expiry Date:</b>{{$product_by_details->expiry_date}}</p>
 
             </div><!--/product-information-->
         </div>

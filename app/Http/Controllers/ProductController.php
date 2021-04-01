@@ -49,7 +49,7 @@ class ProductController extends Controller
         $data['product_name']=$request->product_name;
         $data['category_id']=$request->category_id;
         $data['manufacture_id']=$request->manufacture_id;
-        $data['product_short_description']=$request->product_short_description;
+        $data['product_short_description']='';
         $data['product_long_description']=$request->product_long_description;
         $data['product_price']=$request->product_price;
         $data['product_size']=$request->product_size;
@@ -137,7 +137,7 @@ public function update_product(Request $request, $product_id){
         $data['product_name']=$request->product_name;
         $data['category_id']=$request->category_id;
         $data['manufacture_id']=$request->manufacture_id;
-        $data['product_short_description']=$request->product_short_description;
+        $data['product_short_description']='';
         $data['product_long_description']=$request->product_long_description;
         $data['product_price']=$request->product_price;
         $data['product_size']=$request->product_size;
