@@ -17,6 +17,9 @@ Route::post('/contactUs', 'ContactUsController@contact');
 Route::get('/store-location', 'StoreLocationController@index');
 Route::post('/update-cart','CartController@update_cart');
 
+Route::get('/upload-drug-list', 'UploadDrugListController@index');
+Route::post('/upload-drug-list', 'UploadDrugListController@upload');
+
 Route::post('/send-pharm-notification', 'SendPharmNotification@send');
 Route::get('/pharm-confirm-prescription', 'PharmConfirmPrescription@confirm');
 Route::get('/pharm-confirm-prescription-user', 'PharmConfirmPrescription@confirmUser');

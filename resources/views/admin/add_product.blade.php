@@ -14,6 +14,7 @@
     </li>
 </ul>
 
+<div class="text-center"><a class="btn btn-primary" href="{{url('/upload-drug-list')}}">Use CSV uploader instead</a></div><br>
 <div class="row-fluid sortable">
     <div class="box span12">
         <div class="box-header" data-original-title>
