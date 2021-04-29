@@ -118,7 +118,7 @@ Route::get('/unactive-slider/{slider_id}','SliderController@unactive_slider');
 Route::get('/active-slider/{slider_id}', 'SliderController@active_slider');
 // Route::get('/paystack', 'PaystackController@paystack');
 Route::get('/paystack', function(){
-
+  
   $curl = curl_init();
   
   curl_setopt_array($curl, array(
