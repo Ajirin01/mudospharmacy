@@ -44,12 +44,27 @@ class ProductController extends Controller
 
         }
 
+    public function productExit($product_name){
+        $product = DB::table('tbl_products')
+                         ->select('tbl_products.*')
+                         ->where('product_name',$product_name)
+                         ->get();
+
+        // return count($product);
+        if(count($product) == 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 
     public function save_product(Request $request){
-
+        
         $data=array();
         $data['product_name']=$request->product_name;
+        // echo $this->productExit($data['product_name']);
+        // exit;
         $data['category_id']=$request->category_id;
         $data['manufacture_id']=$request->manufacture_id;
         $data['product_short_description']='';
@@ -71,11 +86,20 @@ class ProductController extends Controller
             $image_url=$upload_path.$image_full_name;
             $success=$image->move($upload_path, $image_full_name);
             if($success){
+                $product_exit = $this->productExit($data['product_name']);
                 $data['product_image']=$image_url;
-
-                DB::table('tbl_products')->insert($data);
-                Session::put('message', 'Save Successfuly');
-                return Redirect::to('/add-product');
+                if($product_exit){
+                    // echo "<script>alert('Product Name :".$request->product_name." Already Exist!')</script>";
+                    // echo "<script>window.location = '/add-product'</script>";
+                    $error = "Product Name: ".$request->product_name." Already Exists!";
+                    Session::put('error', $error);
+                    return Redirect::to('/add-product');
+                }else{
+                    DB::table('tbl_products')->insert($data);
+                    Session::put('message', 'Save Successfuly');
+                    return Redirect::to('/add-product');
+                }
+               
 
             }
         }

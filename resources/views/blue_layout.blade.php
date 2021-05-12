@@ -384,11 +384,12 @@
         <div class="side-menu animate-dropdown outer-bottom-xs">
           <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
           <nav class="yamm megamenu-horizontal">
-            <ul class="nav">
-                @foreach ($all_published_category as $v_category)
+            <ul class="nav" style="overflow: scroll; height: 600px">
+                @foreach ($all_published_category as $key => $v_category)
                   <li class="dropdown menu-item"> <a href="{{URL::to('/product_by_category/'.$v_category->category_id)}}">{{$v_category->category_name}}</a>
+                  <!-- /.dropdown-menu --> </li>
                 @endforeach
-                <!-- /.dropdown-menu --> </li>
+                {{-- @endforeach --}}
             </ul>
             <!-- /.nav --> 
           </nav>
@@ -399,14 +400,16 @@
         <div class="side-menu animate-dropdown outer-bottom-xs">
           <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Brands</div>
           <nav class="yamm megamenu-horizontal">
+          
             @php
                 $all_published_manufacture=DB::table('tbl_manufacture')
                                               ->where('publication_status', 1)
                                                             ->get();
             @endphp
-            <ul class="nav">
-                @foreach ($all_published_manufacture as $v_manufacture)
+            <ul class="nav" style="overflow: scroll; height: 600px">
+                @foreach ($all_published_manufacture as $key1 => $v_manufacture)
                   <li class="dropdown menu-item"> <a href="{{URL::to('/product_by_brand/'.$v_manufacture->manufacture_id)}}">{{$v_manufacture->manufacture_name}}</a>
+                  
                 @endforeach
                 <!-- /.dropdown-menu --> </li>
             </ul>

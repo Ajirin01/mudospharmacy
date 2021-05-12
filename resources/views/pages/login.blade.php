@@ -1,6 +1,7 @@
 
 @extends('auth_layout')
 @section('content')
+
     <div class="limiter">
 		<div class="container-login100" style="background-color:  rgba(6, 2, 14, 0)">
 			<div class="wrap-login100">
@@ -45,6 +46,7 @@
 						<a class="txt2" href="{{URL::to('/register-check?total_price='.$total_price)}}">
 							Sign Up
 						</a>
+						
 					</div>
 				</form>
 			</div>

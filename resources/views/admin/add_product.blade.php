@@ -33,6 +33,18 @@
 
 
         </p>
+        <p class="alert-danger">
+          <?php
+  
+          $error=Session::get('error');
+          if($error){
+              echo $error;
+              Session::put('error', null);
+          }
+          ?>
+  
+  
+          </p>
         <div class="box-content">
             
         <form class="form-horizontal" action="{{url('/save-product')}}" method="post" enctype="multipart/form-data">
