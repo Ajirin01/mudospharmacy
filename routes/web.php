@@ -174,8 +174,9 @@ if($q != " "){
 
     
 }else{
+  $manage_product_by_category=view('pages.search_result',['hasRecord'=>false]);
 return view('blue_layout')
-->with('pages.search_result', ['hasRecord'=>false]);
+->with('pages.search_result', $manage_product_by_category);
 }
 }
 
