@@ -22,6 +22,9 @@ class CheckoutController extends Controller
     }
 
     public function customer_registration(Request $request){
+      $previous_url = SESSION::get('_previous')['url'];
+      $previous_filename = pathinfo($previous_url)['filename'];
+      $filename = "login-check?_token=".SESSION::get('_token')."&total_price=".SESSION::get('total_price');
 
         $data=array();
         $data['customer_name']=$request->customer_name;
@@ -36,7 +39,7 @@ class CheckoutController extends Controller
         // exit;
         if(count($result)>0){
           return redirect()->back()->with('error','email already exists!');
-        }else{
+        }if($previous_filename == $filename && count($result) == 0){
           $customer_id= DB::table('tbl_customer')
                           ->insertGetId($data);
           Session::put('total_price', $request->total_price);
@@ -44,6 +47,8 @@ class CheckoutController extends Controller
           Session::put('customer_name',$request->customer_name);
           Session::put('email',$request->customer_email);
           return Redirect::to('/checkout');
+        }else{
+          return Redirect::to('/');
         }
     }
 
@@ -178,27 +183,43 @@ class CheckoutController extends Controller
     }
 
     public function customer_login(Request $request){
-    
+      $previous_url = SESSION::get('_previous')['url'];
+      // return response()->json($previous_url);
+      $filename = "login-check?_token=".SESSION::get('_token')."&total_price=".SESSION::get('total_price');
+
+      $previous_filename = pathinfo($previous_url)['filename'];
+      // return response()->json($previous_filename == "lgin-check?_token=FJ5YqFWB8ecSIaDU1HB8ScugU76f7vG2aFKiTIA9&total_price=950");
         $customer_email=$request->customer_email;
         $password=md5($request->password);
         $result=DB::table('tbl_customer')
                ->where('customer_email',$customer_email)
                ->where('password', $password)
                ->first();
+              //  return response()->json($result == null);
 
-              if($result){
+              if(($result) != null && $previous_filename == $filename){
                   Session::put('customer_id',$result->customer_id);
                   Session::put('email',$result->customer_email);
                   return Redirect::to('/checkout');
               }
-              else{
+              if(($result) != null && $previous_filename != $filename){
+                Session::put('customer_id',$result->customer_id);
+                  Session::put('email',$result->customer_email);
                 return Redirect::to('/');
+              }else{
+                  return redirect()->back()->with('error','email or password not correct!');
               }
     }
 
   public function payment(Request $request){
+  if(env('APP_DEBUG') == true){
     $url = 'http://localhost:8000?customer_id='.Session::get('customer_id');
-                return Redirect::to($url);
+    return Redirect::to($url);
+  }else{
+    $url = 'https://payment.mudospharma.com?customer_id='.Session::get('customer_id');
+    return Redirect::to($url);
+  }
+   
       // return view('pages.payment');
   }
 

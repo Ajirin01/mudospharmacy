@@ -9,6 +9,13 @@
 					<span class="login100-form-title p-b-26">
 						Signup
 					</span>
+					<span>
+						@if (session('error'))
+							<b class="text-danger">
+								{{session('error')}}
+							</b>
+						@endif
+					</span>
 					<span class="login100-form-title p-b-48">
 						<i class="zmdi zmdi-account"></i>
 					</span>
@@ -59,5 +66,7 @@
 </div>
 </div>
 </div>
-
+@php
+	session::put('error', '');
+@endphp
 @endsection
