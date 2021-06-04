@@ -213,8 +213,13 @@ class CheckoutController extends Controller
 
   public function payment(Request $request){
   if(env('APP_DEBUG') == true){
-    $url = 'http://localhost:8000?customer_id='.Session::get('customer_id');
-    return Redirect::to($url);
+    $url = 'http://payment.mudos.com?customer_id='.Session::get('customer_id');
+    // $url = 'http://payment.mudos.com';
+    return Redirect::to($url)->with(['customer_id'=>Session::get('customer_id')]);
+  //   echo "<form action='http://payment.mudos.com' method='get' id='pay'>
+  //   <input type= 'hidden' name='customer_id' class='hidden' value=".Session::get('customer_id').">
+  //   <script>document.getElementById('pay').submit()</script>
+  // </form>";
   }else{
     $url = 'https://payment.mudospharma.com?customer_id='.Session::get('customer_id');
     return Redirect::to($url);
