@@ -89,7 +89,7 @@
 	</div>
 	<!-- start: Header -->
 
-		<div class="container-fluid-full">
+		<div class="container-fluid-full" style="min-height: 500px">
 		<div class="row-fluid">
 
 			<!-- start: Main Menu -->
@@ -178,7 +178,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script src="{{asset('backend/js/jquery.cookie.js')}}"></script>
 	<script src='{{asset('backend/js/fullcalendar.min.js')}}'></script>
-	{{-- <script src='{{asset('backend/js/jquery.dataTables.min.js')}}'></script> --}}
+	<script src='{{asset('backend/js/jquery.dataTables.min.js')}}'></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	<script src="{{asset('backend/js/excanvas.js')}}"></script>

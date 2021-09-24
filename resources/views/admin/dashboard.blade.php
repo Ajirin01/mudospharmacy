@@ -28,17 +28,17 @@ $vp=DB::table('tbl_products');
         <p>Meet With Pharmacy</p>
         <span class="badge">46</span>
     </a> -->
-    <a class="quick-button metro blue span3" href="/manage-order">
+    <a class="quick-button metro blue span3" href="{{ URL::to('/manage-order') }}">
         <i class="icon-shopping-cart"></i>
         <p>Orders</p>
     <span class="badge">{{$vorder->count()}}</span>
     </a>
-    <a class="quick-button metro green span3" href="/all-product">
+    <a class="quick-button metro green span3" href="{{ URL::to('/all-product') }}">
         <i class="icon-barcode"></i>
         <p>Products</p>
         <span class="badge">{{$vp->count()}}</span>
     </a>
-    <a href="/order_summary" class="quick-button metro pink span3">
+    <a href="{{ URL::to('/order_summary') }}" class="quick-button metro pink span3">
         <i class="icon-bar-chart"></i>
         <p>Orders Summary</p>
         <span class="badge"></span>
